@@ -7,17 +7,34 @@ module.exports = (toolbox) => {
     return !!package.dependencies['react-native'];
   }
 
+  async function isTypeScript() {
+    const package = await filesystem.read('package.json', 'json');
+
+    return !!package.dependencies['typescript'];
+  }
+
+
   async function createComponent(folder, name) {
     if (!name) {
       error('Name must be specified');
       return
     }
 
+    const templateType = (await isTypeScript()) 
+      ? 'component-ts.js.ejs' 
+      : 'component.js.ejs'; 
+
+    const templateExtension = (await isTypeScript()) ? 'tsx' : 'js';
+
     await template.generate({
-      template: 'component.js.ejs',
-      target: `${folder}/${name}/index.js`,
+      template: templateType,
+      target: `${folder}/${name}/index.${templateExtension}`,
       props: { name },
     })
+
+    const extensionType = (await isTypeScript()) ? 'ts' : 'js';
+
+    console.log(extensionType);
 
     const styleTemplate = (await isReactNative())
       ? 'styles-rn.js.ejs'
@@ -25,7 +42,7 @@ module.exports = (toolbox) => {
 
     await template.generate({
       template: styleTemplate,
-      target: `${folder}/${name}/styles.js`,
+      target: `${folder}/${name}/styles.${extensionType}`,
     })
 
     success(`Generated ${folder}/${name}.`)
