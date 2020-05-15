@@ -34,8 +34,6 @@ module.exports = (toolbox) => {
 
     const extensionType = (await isTypeScript()) ? 'ts' : 'js';
 
-    console.log(extensionType);
-
     const styleTemplate = (await isReactNative())
       ? 'styles-rn.js.ejs'
       : 'styles-react.js.ejs'
