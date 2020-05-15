@@ -25,9 +25,12 @@
     "gluegun": "latest"
   },
   "devDependencies": {
-    "standard": "^12.0.1",
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^8.3.4",
+    "husky": "^4.2.5",
+    "jest": "^24.1.0",
     "prettier": "^1.12.1",
-    "jest": "^24.1.0"
+    "standard": "^12.0.1"
   },
   "jest": {
     "testEnvironment": "node"
@@ -40,6 +43,11 @@
   "prettier": {
     "semi": false,
     "singleQuote": true
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
   },
   "repository": {
     "type": "git",
