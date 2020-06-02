@@ -10,7 +10,10 @@ module.exports = (toolbox) => {
   async function isTypeScript() {
     const package = await filesystem.read('package.json', 'json');
 
-    return !!package.dependencies['typescript'];
+    const mobile = !!package.devDependencies['typescript'];
+    const web = !!package.dependencies['typescript'];
+
+    return mobile || web;
   }
 
 
@@ -20,9 +23,9 @@ module.exports = (toolbox) => {
       return
     }
 
-    const templateType = (await isTypeScript()) 
-      ? 'component-ts.js.ejs' 
-      : 'component.js.ejs'; 
+    const templateType = (await isTypeScript())
+      ? 'component-ts.js.ejs'
+      : 'component.js.ejs';
 
     const templateExtension = (await isTypeScript()) ? 'tsx' : 'js';
 
