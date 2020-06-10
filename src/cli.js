@@ -11,6 +11,15 @@ async function run (argv) {
     .plugins('./node_modules', { matching: 'exbase-*', hidden: true })
     .help() // provides default for help, h, --help, -h
     .version() // provides default for version, v, --version, -v
+    .defaultCommand({
+      run: async toolbox => {
+        const { print, meta } = toolbox
+        print.info(`exbase-cli version ${meta.version()}`)
+        print.info(``)
+        print.info(`  Type exbase --help for more info`)
+      },
+    })
+    .checkForUpdates(25)
     .create()
   // enable the following method if you'd like to skip loading one of these core extensions
   // this can improve performance if they're not necessary for your project:

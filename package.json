@@ -1,6 +1,6 @@
 {
   "name": "exbase",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "exbase CLI",
   "bin": {
     "exbase": "bin/exbase"
@@ -22,6 +22,7 @@
   ],
   "license": "MIT",
   "dependencies": {
+    "fs-jetpack": "^2.4.0",
     "gluegun": "latest"
   },
   "devDependencies": {
