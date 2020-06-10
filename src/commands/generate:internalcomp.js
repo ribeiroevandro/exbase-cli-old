@@ -1,6 +1,6 @@
 module.exports = {
   name: 'generate:internalcomp',
-  alias: 'cic new',
+  alias: 'cic',
   description: 'Create a new internal component within a screen src/screens/Example/components',
   run: async toolbox => {
     const { createComponent, strings, filesystem, print, prompt } = toolbox
